@@ -17,18 +17,14 @@ export default function Home() {
     event.preventDefault();
     setErro(null);
     new Promise(resolve => setTimeout(resolve, 1000));   
-
-    // if (login == 'teste@gmail.com' && senha == '123456')
-    // else
-    // setErro("Email ou senha incorretos")
     
     signInWithEmailAndPassword (auth, login, senha)
       .then(usuarioLogado =>{
-        Router.push("/cadastroPergunta") 
+        Router.push("/segundaTela") 
       })
       .catch(erro => {
         console.log(erro)
-          setErro('Email ou senha incorretos!')
+          alert('Email ou senha incorreta!')
       })
   }
 

@@ -94,7 +94,7 @@ body {
 }
 
 .btn2 {
-    background-color: rgb(148, 146, 146);
+    background-color: rgb(117, 106, 114);
     color: #fff;
     text-shadow: 1px 1px 2px black;
     width: 100px;
@@ -104,6 +104,7 @@ body {
     cursor: pointer;
     border: radius 5px; ;
     margin: 0 !important;
+    padding-bottom: 5px;
 }
 
 .btn3 {

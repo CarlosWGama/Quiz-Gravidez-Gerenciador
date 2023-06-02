@@ -49,6 +49,30 @@ export default function SegundaTela() {
     }
   };
 
+  // const atualizarNumeros = async () => {
+
+
+  //   const docConfig = doc(db, 'config', 'contador');
+  //   const dados = await getDoc(docConfig);
+  //   let contador = dados.data().contador;
+  //   let i = 1;
+    
+  //   //Atualiza a numeração das perguntas
+  //   getDocs(collection(db, 'perguntas'))
+  //     .then(snapshot => {
+  //       snapshot.forEach(doc => {
+  
+  //         setDoc(doc(db, 'perguntas', i), {doc.data()})
+  //         i++;
+  //       })
+  //     });
+      
+  //     await deleteDoc(doc(db, "perguntas", i));
+
+
+
+  // }
+
   const editarPergunta = async (id) => {
     router.push("/cadastroPergunta?pergunta="+id);
     //localStorage.setItem("pergunta", id);
