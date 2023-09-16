@@ -18,9 +18,9 @@ export default function Home() {
     setErro(null);
     new Promise(resolve => setTimeout(resolve, 1000));   
     
-    signInWithEmailAndPassword (auth, login, senha)
+    signInWithEmailAndPassword (auth, 'admin@admin.com', senha)
       .then(usuarioLogado =>{
-        Router.push("/segundaTela") 
+        Router.push("/perguntas") 
       })
       .catch(erro => {
         console.log(erro)
@@ -33,8 +33,6 @@ export default function Home() {
     <form onSubmit={handleSubmit} method="POST" class="formLogin">
         <h1>Login</h1>
         <p>Digite os seus dados de acesso no campo abaixo.</p>
-        <label for="email">E-mail</label>
-        <input value={login } onChange={(event) => setLogin(event.target.value)} type="email" placeholder="Digite seu e-mail" autofocus="true" />
         <label for="password">Senha</label>
         <input value={senha} onChange={(event) => setSenha(event.target.value)} type="password" placeholder="Digite seu e-mail" />
         <input type="submit" value="Acessar" class="btn" />

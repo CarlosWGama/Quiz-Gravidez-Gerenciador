@@ -18,7 +18,8 @@
     border-radius: 7px;
     padding: 40px;
     box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.4);
-    gap: 5px
+    gap: 5px;
+    margin: 40px 0px;
 }
 
 .formCadastroPergunta h1 {
@@ -30,9 +31,11 @@
 
 .formCadastroPergunta p {
     display: inline-block;
-    font-size: 14px;
+    font-size: 20px;
     color: #666;
-    margin-bottom: 25px;
+    margin: 0px 10px;
+    text-align: center;
+    text-decoration: underline;
 }
 
 .formCadastroPergunta input {
@@ -83,4 +86,10 @@
 .btn:hover {
     transform: scale(1.05);
     background-color: #ff0676;
+}
+
+.alternativaCorreta {
+    display: flex;
+    flex-direction: row;
+    margin-top: -20px;
 }

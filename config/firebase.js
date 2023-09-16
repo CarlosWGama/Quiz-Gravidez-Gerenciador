@@ -4,13 +4,13 @@ import { getFirestore } from "firebase/firestore";
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDB7v5TPkuIbVnrfzqyscYgHLo_y5bBpDw",
-    authDomain: "quiz-gravidez.firebaseapp.com",
-    projectId: "quiz-gravidez",
-    storageBucket: "quiz-gravidez.appspot.com",
-    messagingSenderId: "743749491903",
-    appId: "1:743749491903:web:b5d122c840ab43f1fc7a0a",
-    measurementId: "G-SB0D2K8K2C"
+    apiKey: "AIzaSyAfg4Mdm9YAFXDCtNvYLWemYZO4vu-9W3c",
+    authDomain: "teste-3b3c1.firebaseapp.com",
+    projectId: "teste-3b3c1",
+    storageBucket: "teste-3b3c1.appspot.com",
+    messagingSenderId: "597506147671",
+    appId: "1:597506147671:web:c133d11e06edcd7ef66a12",
+    measurementId: "G-JQ87DPM0N5"
   };
   
   const app = initializeApp(firebaseConfig);

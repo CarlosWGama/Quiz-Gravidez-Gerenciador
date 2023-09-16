@@ -5,32 +5,17 @@ import styles from "./../styles/segundaTela.module.css";
 import { useRouter } from "next/navigation";
 import { db } from "@/config/firebase";
 import { useEffect, useState } from "react";
-import {
-  collection,
-  deleteDoc,
-  doc,
-  getDoc,
-  getDocs,
-  setDoc,
-} from "firebase/firestore";
+import { collection, deleteDoc, doc, getDocs, query, orderBy } from "firebase/firestore";
 
 export default function SegundaTela() {
   const [perguntas, setPerguntas] = useState([]);
   const router = useRouter();
-  // const router = useRouter();
 
-  useEffect(() => {
-    getFirestoreData();
-  }, []);
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    router.push("/cadastroPergunta");
-  };
-
-  const getFirestoreData = async () => {
-    const snapshot = await getDocs(collection(db, "perguntas"));
+  // =========================================================
+  const buscarPerguntas = async () => {
+    const snapshot = await getDocs(query(collection(db, "perguntas"), orderBy('data-cadastro')));
     const retorno = [];
+
     snapshot.forEach((doc) => {
       const dados = { ...doc.data(), id: doc.id };
       retorno.push(dados);
@@ -38,60 +23,35 @@ export default function SegundaTela() {
     console.log(retorno);
     setPerguntas(retorno);
   };
-
+  // =================
   const deletarPergunta = async (id) => {
     try {
-      await deleteDoc(doc(db, `perguntas/${id}/alternativas`, 'valores'));
-      await deleteDoc(doc(db, "perguntas", id));
-      getFirestoreData();
+      if (confirm('Você realmente deseja deletar essa pergunta?')) {
+        await deleteDoc(doc(db, `perguntas/${id}/alternativas`, 'valores'));
+        await deleteDoc(doc(db, "perguntas", id));
+        buscarPerguntas();
+      }
     } catch (erro) {
       alert(erro);
     }
   };
-
-  // const atualizarNumeros = async () => {
-
-
-  //   const docConfig = doc(db, 'config', 'contador');
-  //   const dados = await getDoc(docConfig);
-  //   let contador = dados.data().contador;
-  //   let i = 1;
-    
-  //   //Atualiza a numeração das perguntas
-  //   getDocs(collection(db, 'perguntas'))
-  //     .then(snapshot => {
-  //       snapshot.forEach(doc => {
-  
-  //         setDoc(doc(db, 'perguntas', i), {doc.data()})
-  //         i++;
-  //       })
-  //     });
-      
-  //     await deleteDoc(doc(db, "perguntas", i));
-
-
-
-  // }
-
+  // =================
   const editarPergunta = async (id) => {
-    router.push("/cadastroPergunta?pergunta="+id);
-    //localStorage.setItem("pergunta", id);
-    
+    router.push("/cadastrar-pergunta?pergunta="+id);    
   };
-
+  // ================
+  useEffect(() => {
+    buscarPerguntas();
+  }, []);
+  // ======================================================================
   return (
     <div class="page">
-      <form
-        onSubmit={handleSubmit}
-        method="POST"
-        style={{ alignItems: "center" }}
-        className={styles.formCadastroPergunta}
-      >
+      <div className={styles.formCadastroPergunta}>
 
         <div className={styles.divTabela}>
           <section className={styles.header}>
             <h1 style={{}}>Perguntas</h1>
-            <input type="submit" value="Cadastrar nova pergunta" class="btn3" />
+            <input type="button" value="Cadastrar nova pergunta" class="btn3" onClick={() => router.push('/cadastrar-pergunta')}/>
           </section>
           <table
             style={{
@@ -104,31 +64,26 @@ export default function SegundaTela() {
             <thead>
               <tr>
                 <th>Numero</th>
-                <th>Titulo</th>
+                <th style={{width:'80%'}}>Titulo</th>
                 <th>Editar/Excluir</th>
               </tr>
             </thead>
             <tbody>
               {perguntas.map((valor, index) => (
                 <tr key={index} className={styles.tabelaTr}>
-                  <td>{valor.id}</td>
+                  <td>{index+1}</td>
                   <td>{valor.titulo}</td>
                   <td>
                     {" "}
                     <input type="button" value="Editar" class="btn2" onClick={() => editarPergunta(valor.id)} />
-                    <input
-                      type="button"
-                      value="Excluir"
-                      class="btn2"
-                      onClick={() => deletarPergunta(valor.id)}
-                    />
+                    <input type="button" value="Excluir" class="btn2" onClick={() => deletarPergunta(valor.id)} />
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-      </form>
+      </div>
     </div>
   );
 }
