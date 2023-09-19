@@ -4,6 +4,7 @@ import { db, auth } from '@/config/firebase';
 import { setDoc, getDocs, doc, getDoc, collection } from "@firebase/firestore";
 import { useEffect, useState } from "react";
 import { Formik, Field } from "formik";
+import Navegacao from "./_navegacao";
 
 export default function CadastroPergunta() {
 
@@ -56,6 +57,7 @@ export default function CadastroPergunta() {
 
   return (
     <div class="page">
+      <Navegacao/>
       <Formik
          enableReinitialize
         initialValues={pergunta}

@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { db } from "@/config/firebase";
 import { useEffect, useState } from "react";
 import { collection, deleteDoc, doc, getDocs, query, orderBy } from "firebase/firestore";
+import Navegacao from './_navegacao';
 
 export default function SegundaTela() {
   const [perguntas, setPerguntas] = useState([]);
@@ -46,6 +47,7 @@ export default function SegundaTela() {
   // ======================================================================
   return (
     <div class="page">
+      <Navegacao/>
       <div className={styles.formCadastroPergunta}>
 
         <div className={styles.divTabela}>
